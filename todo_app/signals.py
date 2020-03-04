@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, pre_delete
 from django.dispatch import receiver
 from todo_app.models import Key
-from todo_app.tasks import addkey, deletekey
+from todo_app.tasks import addkey, deletekey,updatekey
 from threading import Thread
 
 print("SIGNALLLL")
@@ -14,7 +14,7 @@ def start_task(sender, instance, created, **kwargs):
         print('ADDED KEY')
         background_job.start()
     else:
-        background_job = Thread(target=deletekey, args=(instance.username.email, instance.type))
+        background_job = Thread(target=updatekey, args=(instance.username.email, instance.type))
         print('UPDATED KEY')
         background_job.start()
 
