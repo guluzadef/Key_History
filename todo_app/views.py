@@ -70,7 +70,7 @@ def login(request):
             if user:
                 auth_login(request, user)
                 logging.info(f"Loginned id:{user.id},username={user},email={user.email}")
-                return redirect('addkey')
+                return redirect('/')
             else:
                 messages.error(
                     request, "Username or Password inValid"
